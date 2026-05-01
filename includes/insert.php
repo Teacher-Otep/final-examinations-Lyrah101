@@ -9,8 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $_POST['address'] ?? '';
     $contact = $_POST['contact'] ?? '';
 
+    if ($name == '' || $surname == '') {
+        die("Name and Surname are required!");
+    }
+
     try {
-        $sql = "INSERT INTO students (name, surname, middlename, address, contact_number) 
+        $sql = "INSERT INTO students (name, surname, middlename, address, contact) 
                 VALUES (:name, :surname, :middlename, :address, :contact)";
         
         $stmt = $pdo->prepare($sql);
